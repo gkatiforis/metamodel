@@ -56,9 +56,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Abstract implementation of query rewriter. This implementation delegates the
- * rewriting of the Query into several subtasks according to the query items to
- * be rendered. This makes it easy to overload single methods in order to
+ * Abstract implementation of query rewriter. This implementation delegates the rewriting of the Query into several
+ * subtasks according to the query items to be rendered. This makes it easy to overload single methods in order to
  * correct syntax quirks.
  */
 public abstract class AbstractQueryRewriter implements IQueryRewriter {
@@ -103,10 +102,9 @@ public abstract class AbstractQueryRewriter implements IQueryRewriter {
     }
 
     /**
-     * Method to modify query before rewriting begins. Overwrite this method if
-     * you want to change parts of the query that are not just rendering
-     * related. Cloning the query before modifying is recommended in order to
-     * not violate referential integrity of clients (the query is mutable).
+     * Method to modify query before rewriting begins. Overwrite this method if you want to change parts of the query
+     * that are not just rendering related. Cloning the query before modifying is recommended in order to not violate
+     * referential integrity of clients (the query is mutable).
      * 
      * @param query
      * @return the modified query
@@ -302,7 +300,7 @@ public abstract class AbstractQueryRewriter implements IQueryRewriter {
         }
         return item.toSql(isSchemaIncludedInColumnPaths());
     }
-    
+
     @Override
     public void setStatementParameter(PreparedStatement st, int valueIndex, Column column, Object value)
             throws SQLException {
@@ -404,7 +402,7 @@ public abstract class AbstractQueryRewriter implements IQueryRewriter {
             throw e;
         }
     }
-    
+
     protected Time toTime(Date value) {
         if (value instanceof Time) {
             return (Time) value;
@@ -422,7 +420,7 @@ public abstract class AbstractQueryRewriter implements IQueryRewriter {
         cal.setTime((Date) value);
         return new Timestamp(cal.getTimeInMillis());
     }
-    
+
     @Override
     public Object getResultSetValue(ResultSet resultSet, int columnIndex, Column column) throws SQLException {
         final ColumnType type = column.getType();
@@ -462,8 +460,7 @@ public abstract class AbstractQueryRewriter implements IQueryRewriter {
     }
 
     protected boolean isSupportedVersion(String databaseProductName, int databaseVersion) {
-
-        if(databaseProductName.equals(_dataContext.getDatabaseProductName())
+        if (databaseProductName.equals(_dataContext.getDatabaseProductName())
                 && databaseVersion <= VersionParser.getMajorVersion(_dataContext.getDatabaseVersion())) {
             return true;
         }

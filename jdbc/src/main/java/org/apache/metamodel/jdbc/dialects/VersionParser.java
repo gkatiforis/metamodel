@@ -18,27 +18,27 @@
  */
 package org.apache.metamodel.jdbc.dialects;
 
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * This class is responsible for parsing version numbers in software products.
- * Version strings are expected to be numeric and dot-separated.
+ * This class is responsible for parsing version numbers in software products. Version strings are expected to be
+ * numeric and dot-separated.
  */
 class VersionParser {
-    private static final Pattern versionPattern = Pattern.compile( "[0-9]+(\\.[0-9]+)+");
+    private static final Pattern versionPattern = Pattern.compile("[0-9]+(\\.[0-9]+)+");
 
-    private VersionParser(){}
+    private VersionParser() {
+    }
 
     /**
      * @param stringToParse the string that contains the version.
      * @return If the version exists returns the full version else empty string.
      */
-    public static String getVersion(String stringToParse){
-        if(stringToParse != null) {
+    public static String getVersion(String stringToParse) {
+        if (stringToParse != null) {
             Matcher matcher = versionPattern.matcher(stringToParse);
-            if (matcher.find()){
+            if (matcher.find()) {
                 return matcher.group();
             }
         }
@@ -49,11 +49,11 @@ class VersionParser {
      * @param stringToParse the string that contains the version.
      * @return If the version exists returns only the number(s) before the first dot else 0.
      */
-    public static int getMajorVersion(String stringToParse){
+    public static int getMajorVersion(String stringToParse) {
         String fullVersion = getVersion(stringToParse);
-        if(fullVersion != null) {
+        if (fullVersion != null) {
             int firstDot = fullVersion.indexOf('.');
-            if(firstDot >= 0) {
+            if (firstDot >= 0) {
                 return Integer.valueOf(fullVersion.substring(0, firstDot));
             }
         }
